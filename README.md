@@ -62,8 +62,9 @@ export default Component;
 1. Fork this repo
 2. Clone your fork
 3. Code
-4. Run npm install
-5. Test your changes
+4. Run npm install (for first time builds)
+5. Run npm run build (to build after any code changes)
+6. Test your changes
 
     For this, I like to use [yalc](https://github.com/whitecolor/yalc), as it allows to emulate the process of using npm/yarn.
 
@@ -72,9 +73,6 @@ export default Component;
     3. Publish the package with yalc: `yalc publish`
     4. Add the package to your test project `yalc add react-google-places-autocomplete`
     5. If needed, to update the package on your test project: `yalc update react-google-places-autocomplete`
-
-
-5. Submit a PR!
 
 
 <br />
