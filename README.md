@@ -62,9 +62,8 @@ export default Component;
 1. Fork this repo
 2. Clone your fork
 3. Code
-4. Run npm install (for first time builds)
-5. Run npm run build (to build after any code changes)
-6. Test your changes
+4. Run npm install
+5. Test your changes
 
     For this, I like to use [yalc](https://github.com/whitecolor/yalc), as it allows to emulate the process of using npm/yarn.
 

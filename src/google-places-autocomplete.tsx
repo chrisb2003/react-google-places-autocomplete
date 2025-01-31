@@ -40,7 +40,6 @@ const GooglePlacesAutocomplete: React.ForwardRefRenderFunction<GooglePlacesAutoc
       loadOptions={fetchSuggestions}
       getOptionValue={({ value }) => value.place_id}
       noOptionsMessage={(i) => (!i.inputValue ? (args.noOptionsMessage ?? 'Start typing to search') : "No results found")}
-      placeholder={(args.noOptionsMessage ?? 'Start typing to search')}
     />
   );
 };
