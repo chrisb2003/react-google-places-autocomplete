@@ -23,6 +23,7 @@ const GooglePlacesAutocomplete: React.ForwardRefRenderFunction<GooglePlacesAutoc
     sessionToken,
     withSessionToken: args.withSessionToken ?? false,
     suggestionsFilter: args.suggestionsFilter,
+    blackListedPlaceIds: args.blackListedPlaceIds ?? [],
   });
 
   useImperativeHandle(ref, () => ({
@@ -39,7 +40,6 @@ const GooglePlacesAutocomplete: React.ForwardRefRenderFunction<GooglePlacesAutoc
       {...args.selectProps ?? {}}
       loadOptions={fetchSuggestions}
       getOptionValue={({ value }) => value.place_id}
-      noOptionsMessage={(i) => (!i.inputValue ? 'Start typing to search' : 'No results found')}
     />
   );
 };

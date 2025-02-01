@@ -13,9 +13,11 @@ type UseFetchSuggestionsArg = {
   sessionToken?: google.maps.places.AutocompleteSessionToken;
   withSessionToken: boolean;
   suggestionsFilter?: (suggestions: google.maps.places.AutocompletePrediction[]) => google.maps.places.AutocompletePrediction[];
+  blackListedPlaceIds: string[];
 }
 
-const useFetchSuggestions = (arg: UseFetchSuggestionsArg): ((value: string, cb: CBType) => void) => {
+const useFetchSuggestions = (arg: UseFetchSuggestionsArg): ((value: string, cb: CBType) => void) =>
+{
   const {
     autocompletionRequest,
     debounce,
@@ -24,9 +26,11 @@ const useFetchSuggestions = (arg: UseFetchSuggestionsArg): ((value: string, cb: 
     sessionToken,
     withSessionToken,
     suggestionsFilter,
+    blackListedPlaceIds,
   } = arg;
 
-  const [fetchSuggestions] = useDebouncedCallback((value: string, cb: CBType): void => {
+  const [fetchSuggestions] = useDebouncedCallback((value: string, cb: CBType): void =>
+  {
     if (!placesService) return cb([]);
     if (value.length < minLengthAutocomplete) return cb([]);
 
@@ -37,11 +41,18 @@ const useFetchSuggestions = (arg: UseFetchSuggestionsArg): ((value: string, cb: 
         autocompletionReq,
         value,
         withSessionToken && sessionToken,
-      ), (suggestions) => {
-        let filteredSuggestions = suggestions || [];
-        if(suggestionsFilter && suggestions) filteredSuggestions = suggestionsFilter(suggestions);
-        cb((filteredSuggestions).map(suggestion => ({ label: suggestion.description, value: suggestion })));
-      },
+      ), (suggestions) =>
+    {
+      let filteredSuggestions = suggestions || [];
+      if (suggestionsFilter && suggestions) filteredSuggestions = suggestionsFilter(suggestions);
+
+      // Google place_id's never allowed to be suggested
+      if (blackListedPlaceIds.length > 0) {
+        filteredSuggestions = filteredSuggestions!.filter((x) => !blackListedPlaceIds.includes(x.place_id));
+      }
+
+      cb((filteredSuggestions).map(suggestion => ({ label: suggestion.description, value: suggestion })));
+    },
     );
   }, debounce);
 
