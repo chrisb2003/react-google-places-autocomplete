@@ -39,5 +39,4 @@ export default interface GooglePlacesAutocompleteProps {
   suggestionsFilter?: (suggestions: google.maps.places.AutocompletePrediction[]) => google.maps.places.AutocompletePrediction[];
   locationBias?: LatLng;
   locationBiasRadius?: number;
-  placeholder?: React.ReactNode;
 }
