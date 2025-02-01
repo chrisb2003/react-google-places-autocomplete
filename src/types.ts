@@ -40,4 +40,5 @@ export default interface GooglePlacesAutocompleteProps {
   locationBias?: LatLng;
   locationBiasRadius?: number;
   noOptionsMessage?: string;
+  placeholder?: React.ReactNode;
 }
