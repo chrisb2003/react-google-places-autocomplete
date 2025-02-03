@@ -39,7 +39,7 @@ const GooglePlacesAutocomplete: React.ForwardRefRenderFunction<GooglePlacesAutoc
     <AsyncSelect
       {...args.selectProps ?? {}}
       loadOptions={fetchSuggestions}
-      getOptionValue={({ value }) => value.place_id}
+      // getOptionValue={({ value }) => value.place_id}
     />
   );
 };
