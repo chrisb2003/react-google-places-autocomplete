@@ -51,6 +51,12 @@ const useFetchSuggestions = (arg: UseFetchSuggestionsArg): ((value: string, cb: 
         filteredSuggestions = filteredSuggestions!.filter((x) => !blackListedPlaceIds.includes(x.place_id));
       }
 
+      // Illegal Address Places?
+      const BOSAirport = filteredSuggestions!.find((x) => x.place_id === 'ChIJN0na1RRw44kRRFEtH8OUkww');
+      if (BOSAirport) {
+        BOSAirport.description = 'Boston Logan International Airport, 1 Harborside Dr, Boston, MA, 02128, USA';
+      }
+
       cb((filteredSuggestions).map(suggestion => ({ label: suggestion.description, value: suggestion })));
     },
     );
